@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>LOGIN</title>
+</h:head>
+<h:body>
+	<p:growl id="growl" showDetail="true" life="3000" />
+	<p:panel id="alumnos" header="LOGIN">
+
+		<h:form>
+			<h3>Bibliotecario: Favor de autenticarse</h3>
+			<p align="center">
+				<br> <h:graphicImage value="resources/imagenes/images.jpg" />
+				</br>
+			</p>
+
+			<p align="center">
+
+				<h:outputLabel value="Usuario: " for="usuario" />
+				<h:inputText id="usuario" value="#{loginBean.uname}" required="true"
+					requiredMessage="Ingrese su nombre de usuario" />
+				<h:outputLabel value=" Password: " for="pass" />
+
+				<h:inputSecret id="pass" value="#{loginBean.password}"
+					required="true" requiredMessage="Ingrese su contraseña" />
+				<br /> <br />
+				<h:commandButton value="Entrar" action="#{loginBean.loginProject}" />
+
+
+			</p>
+		</h:form>
+	</p:panel>
+</h:body>
+
+</html>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Pedir libro préstado</title>
+</h:head>
+
+<h:body>
+
+	<p:panel id="alumnos" header="Libro para prestamo">
+		<br />
+		
+		<h3><h:outputLabel value="#{loginBean.uname}" for="nombre" />, favor de llenar todos los campos, para confirmar el préstamo de un libro.</h3> 
+		<br />
+		<br />
+		
+		
+
+		<h:form id="form">
+		<p:growl id="growl1" showDetail="true" life="3000" />
+			<p:tabView id="tabView" dynamic="true" cache="true">
+
+				<p:tab id="tba1" title="Alumno">
+
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage id="tab1Img" value="resources/imagenes/alumno.png"
+							style="horizontal-align:middle;" />
+						<p:panel id="PanelInfo"
+							header="Informacion de identificación de alumno">
+							<h:form id="datosAlumno">
+								<h:panelGrid columns="2" cellpadding="10">
+
+									<h:outputLabel value="Boleta: " for="boleta" />
+									<p:inputText id="boleta" size="60"
+										value="#{prestamoBean.estudiantePojo.boleta}"
+										disabled="true" />
+
+									<h:outputLabel value="Nombre: " for="nombre" />
+									<p:inputText id="nombre" size="60"
+										value="#{prestamoBean.estudiantePojo.nombre}"
+										disabled="true" />
+									<h:outputLabel value="Dirección: " for="direccion" />
+									<p:inputText id="direccion" size="60"
+										value="#{prestamoBean.estudiantePojo.direccion}"
+										disabled="true" />
+									<h:outputLabel value="Carrera: " for="carrera" />
+									<p:inputText id="carrera" size="60"
+										value="#{prestamoBean.estudiantePojo.carrera}"
+										disabled="true" />
+									<h:outputLabel value="Edad: " for="edad" />
+									<p:inputText id="edad" size="60"
+										value="#{prestamoBean.estudiantePojo.edad}" disabled="true" />
+
+									<h:outputLabel value="Semestre: " for="semestre" />
+									<p:inputText id="semestre" size="60"
+										value="#{prestamoBean.estudiantePojo.semestre}"
+										disabled="true" />
+									<h:outputLabel value="Inscrito: " for="inscrito" />
+									<p:inputText id="inscrito" size="60"
+										value="#{prestamoBean.estudiantePojo.inscrito}"
+										disabled="true" />
+
+
+								</h:panelGrid>
+							</h:form>
+						</p:panel>
+					</h:panelGrid>
+					<h:panelGrid columns="2" cellpadding="10">
+						<h:outputLabel value="Boleta: *" for="bol" />
+						<p:inputText id="bol" size="94"
+							value="#{prestamoBean.estudiantePojo.boleta}">
+						</p:inputText>
+
+						<p:commandButton value="Buscar" action="#{prestamoBean.buscarEstudiante}"
+							update="datosAlumno:boleta,datosAlumno:nombre,datosAlumno:direccion,datosAlumno:carrera,datosAlumno:edad,datosAlumno:semestre,datosAlumno:inscrito" />
+
+					</h:panelGrid>
+
+
+				</p:tab>
+
+				<p:tab id="tab2" title="Libro">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage id="tab2Img" value="resources/imagenes/librop.png" />
+
+						<h:panelGrid columns="2" id="grid2">
+							<h:outputLabel value="Fecha de prestamo: *" for="inicio" />
+							<p:calendar size="30"
+								value="#{prestamoBean.prestamoPojo.fechaPrestamo}"
+								requiredMessage="Ingrese la Fecha de Inicio">
+								<p:ajax event="dateSelect" update="fin" />
+							</p:calendar>
+							<h:outputLabel value="Fecha de Entrega: *" for="fin" />
+							<p:calendar id="fin"
+								value="#{prestamoBean.prestamoPojo.fechaEntrega}"
+								mindate="#{prestamoBean.prestamoPojo.fechaPrestamo}"
+								required="true" requiredMessage="Ingrese la Fecha de Termino"
+								size="30" />
+						</h:panelGrid>
+						<p:dataTable var="libro" value="#{prestamoBean.libroSeleccion}">
+							<p:column headerText="Titulo">
+								<h:outputText value="#{libro.titulo}" />
+							</p:column>
+							<p:column headerText="Autor">
+								<h:outputText value="#{libro.autor}" />
+							</p:column>
+						</p:dataTable>
+
+					</h:panelGrid>
+				</p:tab>
+
+			</p:tabView>
+			
+			<p:commandButton value="Confirmar prestamo" action="#{prestamoBean.insertar}" update="form:growl1"/>
+
+		</h:form>
+
+	</p:panel>
+
+</h:body>
+
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Gestion de libros</title>
+</h:head>
+
+<h:body>
+	<h3>
+		<h:outputLabel value="#{loginBean.uname}" />
+		, en esta sección podrá consultar los libros
+	</h3>
+	<h:form id="form1">
+		<p:growl id="mensaje" life="2000" />
+	</h:form>
+	<p:growl id="growl" showDetail="true" life="3000" />
+	<p:panel id="alumnos" header="LIBROS">
+		<p align="right">Resultados encontrados</p>
+		<h:form>
+			
+			Buscar libro por título:
+			
+			<p:inputText value="#{prestamoBean.libroPojo.titulo}">
+				<p:ajax event="keyup" update=":libros:form:tablaDatos"
+					listener="#{prestamoBean.buscarAjax}" />
+			</p:inputText>
+			<h:selectOneMenu id="selectTitulo"
+				value="#{prestamoBean.libroPojo.idLibro}">
+				<f:selectItem itemLabel="Buscar por Libro" itemValue="" />
+				<f:selectItems value="#{prestamoBean.listaLibros}" var="r"
+					itemValue="#{r.idLibro}" />
+				<p:ajax update=":libros:form:tablaDatos"
+					listener="#{prestamoBean.buscarTitulo}" />
+			</h:selectOneMenu>
+
+			<h:selectOneMenu id="selectAutor"
+				value="#{prestamoBean.autorPojo.idAutor}" var="pj">
+				<f:selectItem itemLabel="Buscar por Autor" itemValue="" />
+				<f:selectItems value="#{prestamoBean.listaAutores}" var="r"
+					itemValue="#{r.idAutor}" />
+				<p:ajax update=":libros:form:tablaDatos"
+					listener="#{prestamoBean.buscarAutor}" />
+			</h:selectOneMenu>
+
+
+		</h:form>
+
+		<h:form id="libros">
+			<p:panel border="0" id="panel1">
+				<h:form id="form" style="margin-bottom:30px">
+					<p:dataTable value="#{prestamoBean.libroDataModel}" var="pj"
+						id="tablaDatos" paginator="true" rows="10"
+						selection="#{prestamoBean.libroSeleccion}" scrollable="true">
+						<p:column selectionMode="multiple" width="10" />
+						<p:column headerText="Titulo" width="450">
+							<h:outputText value="#{pj.titulo}" />
+						</p:column>
+						<p:column headerText="Editorial" width="200">
+							<h:outputText value="#{pj.editorial}" />
+						</p:column>
+						<p:column headerText="Autor" width="200">
+							<h:outputText value="#{pj.autor}" />
+						</p:column>
+						<p:column headerText="Ubicacion" width="250">
+							<h:outputText value="#{pj.ubicacion}" />
+						</p:column>
+						<p:column headerText="Existencia" width="80">
+							<h:outputText value="#{pj.existencia}" />
+						</p:column>
+						<p:column headerText="Area" width="200">
+							<h:outputText value="#{pj.area}" />
+						</p:column>
+						<f:facet name="footer">
+
+							<p:commandButton value="Pedir libro prestado"
+								update="@parent,:form1:mensaje, :libros:form:refresca "
+								action="#{prestamoBean.pedirLibro}" />
+						</f:facet>
+					</p:dataTable>
+					<p:dataList id="refresca" value="#{prestamoBean.libroSeleccion}"
+						var="pj" type="definition">
+					</p:dataList>
+				</h:form>
+			</p:panel>
+
+		</h:form>
+	</p:panel>
+
+
+</h:body>
+
+</html>

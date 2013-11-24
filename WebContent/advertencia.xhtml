@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>  
+      <title>ADVERTENCIA </title>  
+    </h:head>
+    
+    <h:body>
+    
+      <p:panel id="alumnos" header="¡¡¡ ADVERTENCIA !!!">
+		  <p align="center">  #{user.name}  , el alumno que ha solicitado
+		   el libro no se encuentra registrado en el sistema. <br/><br/> 
+		   </p>
+		   
+			<p align="center">		   
+		  <p:graphicImage id="tab1Img" value="resources/imagenes/adver.png"/>  
+		    <p:graphicImage id="tab1Img" value="resources/imagenes/adverten.png"/>	    
+		    </p><br/>   
+		   <p align="center"><h:commandButton value="Registrar alumno en el sistema" action="registrar"/>
+		   </p>   
+    
+      </p:panel>
+    
+    </h:body>
+    
+</html>

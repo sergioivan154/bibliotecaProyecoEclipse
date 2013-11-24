@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>  
+      <title>Gestion de alumnos</title>  
+    </h:head>
+    
+    
+    
+   <h:body>  
+      <h3> <h:outputLabel value="#{loginBean.uname}" for="nombre" />   , en esta sección podrá ingresar un nuevo alumno</h3>
+   
+		   
+      <p:panel id="alumnos" header="ALUMNOS">
+		 <p:tabView id="tabView">  
+		  
+		     <p:tab id="tab1" title="Registrar Alumno">  
+		        <h:panelGrid columns="2" cellpadding="10">  
+		           <h:graphicImage value="resources/imagenes/registrar.png"/> 
+		            <h:outputText id="tab1Text" value="Con esta opción podrá registrar a un nuevo alumno en el sistema, 
+		            para esto deberá pedir los datos personales de dicho alumno, y por consiguiente generará un nuevo QR y su respectivo registro."/> 
+		            <p align="right"><p:button value="Registrar Alumno" outcome="registrarAlumno"/></p>   
+		        </h:panelGrid>  
+		     </p:tab>  
+		  
+		    <p:tab id="tab2" title="Editar Alumno">  
+		        <h:panelGrid columns="2" cellpadding="10">  
+		             <h:graphicImage value="resources/imagenes/editar.png"/>  
+		            <h:outputText id="tab2Text" value="En esta opción podrá editar la información de un alumno ya resgitrado en el sistema."/> 
+		            <p align="right"><p:button value="Editar Alumno" outcome="editarAlumno"/></p> 
+		        </h:panelGrid>  
+		    </p:tab>  
+		    
+		  </p:tabView>
+	  </p:panel>
+                          
+    </h:body>   
+</html>

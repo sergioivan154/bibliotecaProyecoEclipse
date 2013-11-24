@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>  
+      <title>Editar Alumnos</title>  
+    </h:head>
+    
+    <h:body>
+    
+      <p:panel id="alumnos" header="ALUMNOS"> <h:outputLabel value="#{loginBean.uname}" for="nombre" />    , en esta sección podrá editar el registro un alumno ya registrado
+
+		 <h:form id="form">  
+		 
+		 		<p align="center">
+				 <h:graphicImage value="resources/imagenes/actualizar.png"/>
+				 <h:graphicImage value="resources/imagenes/qr.png"/> 
+				 		 <p align="right"><h:button value="Escanear QR" action="escanear"/></p> 
+				</p> 		 
+		  
+		    <p:growl id="messages" showDetail="true"/>  
+		  
+		    <p:contextMenu for="alumnos" widgetVar="cMenu">     
+		        <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('alumnoTable').showCellEditor();return false;"/>    
+		        <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>    
+		    </p:contextMenu>   
+		  
+		    <p:dataTable id="alumnos" var="alumno" value="#{tableBean.alumnoSmall}" editable="true" editMode="cell" widgetVar="alumnoTable">  
+		  
+		        <f:facet name="header">  
+		            Registro de nuevo Alumno  
+		        </f:facet>  
+		  
+		        <p:ajax event="cellEdit" listener="#{tableBean.onCellEdit}" update=":form:messages" />  
+		  
+		        <p:column headerText="Boleta" style="width:25%">  
+		               <p:cellEditor>  
+		                   <f:facet name="output"><h:outputText value="#{alumno.boleta}" /></f:facet>  
+		                   <f:facet name="input"><p:inputText id="boletaInput" value="#{alumno.boleta}" style="width:96%"/></f:facet>  
+		               </p:cellEditor>  
+		           </p:column>  
+		  
+		          <p:column headerText="Apellidos" style="width:25%">  
+		            <p:cellEditor>  
+		                <f:facet name="output"><h:outputText value="#{alumno.apellidos}" /></f:facet>  
+		                <f:facet name="input"><p:inputText value="#{alumno.apellidos}" style="width:96%" label="Nombre"/></f:facet>  
+		            </p:cellEditor>  
+		        </p:column>  
+		           
+		           <p:column headerText="Nombre(s)" style="width:25%">  
+		            <p:cellEditor>  
+		                <f:facet name="output"><h:outputText value="#{alumno.nombre}" /></f:facet>  
+		                <f:facet name="input"><p:inputText value="#{alumno.nombre}" style="width:96%" label="Nombre"/></f:facet>  
+		            </p:cellEditor>  
+		        </p:column>  
+		  		          		  
+		        <p:column headerText="Carrera" style="width:25%">  
+		            <p:cellEditor>  
+		                <f:facet name="output"><h:outputText value="#{alumno.carrera}" /></f:facet>  
+		                <f:facet name="input">  
+		                    <h:selectOneMenu value="#{alumno.carrera}" style="width:100%">  
+		                        <f:selectItems value="#{tableBean.carreras}" var="carrera" itemLabel="#{carrera}" itemValue="#{carrera}" />  
+		                    </h:selectOneMenu>  
+		                </f:facet>  
+		            </p:cellEditor>  
+		        </p:column>
+		        
+		        <p:column headerText="Préstamos" style="width:25%">  
+		            <p:cellEditor>  
+		                <f:facet name="output"><h:outputText value="#{alumno.prestamo}" /></f:facet>  
+		                <f:facet name="input"><p:inputText value="#{alumno.prestamo}" style="width:96%" label="Prestamo"/></f:facet>  
+		            </p:cellEditor>  
+		        </p:column>
+		        
+		       
+		        
+		     </p:dataTable>
+		   </h:form>  
+		               <br/><br/>
+		   			<p align="center"><h:commandButton value="Eliminar Alumno" action="eliminar"/></p>  
+		   			<p align="center"><h:commandButton value="Actualizar Alumno" action="actualizar"/></p>
+		  </p:panel>      
+    </h:body>
+    
+</html>

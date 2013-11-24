@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>  
+      <title>Registrar alumno</title>  
+    </h:head>
+    
+    <h:body>
+    
+      <p:panel id="alumnos" header="ALUMNOS"> #{user.name}  , en esta sección podrá registrar un nuevo alumno
+			
+		 <h:form id="form">  
+		 
+		 		<p align="center">
+				 <h:graphicImage value="resources/imagenes/registrar1.png"/>
+				 <h:graphicImage value="resources/imagenes/qr.png"/> 
+				 		 <p align="right"><h:commandButton value="Escanear QR" action="escanear"/></p> 
+				</p> 		 
+		  
+		    <p:growl id="messages" showDetail="true"/>  
+		  
+		    <p:contextMenu for="registro" widgetVar="cMenu">     
+		        <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('alumnoTable').showCellEditor();return false;"/>    
+		        <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>    
+		    </p:contextMenu>   
+		  
+		<p:panel id="registro" header="Nuevo alumno">
+		<p:panelGrid columns ="2" style="width:100%">
+		                   <h:outputText value="Boleta: "  for="boletaInput"/>  
+		                   <p:inputText id="boletaInput" value="#{alumno.boleta}" style="width:100%"/>  
+		            
+		               <h:outputText value="Nombre: " for="nombreInput" />  
+		               <p:inputText id="nombreInput" value="#{alumno.boleta}" style="width:100%"/>  
+		            
+		               <h:outputText value="Dirección: " for="direccion" />  
+		                <p:inputText id="direccion" value="#{alumno.nombre}" style="width:100%"/>  
+		       
+		       
+		                <h:outputText value="Carrera: " for="carrera" />  
+		                <p:inputText id="carrera" value="#{alumno.carrera}" style="width:100%"/>  
+		              
+		                <h:outputText value="Edad: " for="edad" />  
+		                <p:inputText id="edad" value="#{alumno.carrera}" style="width:100%"/>  
+		                
+		               
+		    </p:panelGrid>
+		    </p:panel>
+		   </h:form>  
+		               <br/><br/>
+		   			<p align="center"><h:commandButton value="Registrar Alumno" action="registrar"/></p>  
+		  </p:panel>      
+    </h:body>
+    
+</html>
